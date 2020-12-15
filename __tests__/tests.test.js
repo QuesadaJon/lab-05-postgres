@@ -30,40 +30,40 @@ describe('app test', () => {
         });
     });
 
-    // it('finds a ramen by id via GET', async () => {
-    //     const ramen = await Ramen.insert({ brand: 'ramen', type: 'brothy', flavor: 'beef' });
+    it('finds a digimon by id via GET', async () => {
+        const digimon = await Digimon.insert({ name: 'boogermon', description: 'brothy', url: 'https//url.com' });
 
-    //     const response = await request(app)
-    //         .get(`/api/v1/ramen/${ramen.id}`);
+        const response = await request(app)
+            .get(`/api/v1/digimon/${digimon.id}`);
 
-    //     expect(response.body).toEqual(ramen);
-    // });
+        expect(response.body).toEqual(digimon);
+    });
 
-    // it('updates a ramen by id via PUT', async () => {
-    //     const ramen = await Ramen.insert({ brand: 'tokyo', type: 'dry', flavor: 'shoyu' });
+    it('updates a digimon by id via PUT', async () => {
+        const digimon = await Digimon.insert({ name: 'one', description: 'dry', url: 'https//url.com' });
 
-    //     const response = await request(app)
-    //         .put(`/api/v1/ramen/${ramen.id}`)
-    //         .send({
-    //             brand: 'kanto',
-    //             type: 'dry',
-    //             flavor: 'katsu'
-    //         });
+        const response = await request(app)
+            .put(`/api/v1/digimon/${digimon.id}`)
+            .send({
+                name: 'onepointfive',
+                description: 'wet',
+                url: 'https//url.com'
+            });
 
-    //     expect(response.body).toEqual({
-    //         ...ramen,
-    //         brand: 'kanto',
-    //         type: 'dry',
-    //         flavor: 'katsu'
-    //     });
-    // });
+        expect(response.body).toEqual({
+            ...digimon,
+            name: 'onepointfive',
+            description: 'wet',
+            url: 'https//url.com'
+        });
+    });
 
-    // it('deletes a ramen by id via DELETE', async () => {
-    //     const ramen = await Ramen.insert({ brand: 'jons', type: 'extra dry', flavor: 'salt' });
+    it('deletes a digimon by id via DELETE', async () => {
+        const digimon = await Digimon.insert({ name: 'jon', description: 'extra dry', url: 'https//url.com' });
 
-    //     const response = await request(app)
-    //         .delete(`/api/v1/ramen/${ramen.id}`);
+        const response = await request(app)
+            .delete(`/api/v1/digimon/${digimon.id}`);
 
-    //     expect(response.body).toEqual({});
-    // });
+        expect(response.body).toEqual({});
+    });
 });
