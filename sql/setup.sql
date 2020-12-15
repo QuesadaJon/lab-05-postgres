@@ -1,6 +1,8 @@
+DROP TABLE IF EXISTS digimon;
+
 CREATE TABLE digimon (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    title TEXT NOT NULL,
-    description TEXT,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
     url TEXT NOT NULL
-);
+)

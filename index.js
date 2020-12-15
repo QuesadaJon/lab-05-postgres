@@ -1,39 +1,42 @@
-require('dotenv').config()
 const express = require('express')
-const app = express()
-app.use(express.json())
 const Digimon = require('./lib/models/digimon');
+const app = express();
 
-app.post('/digimon', (res, req) => {
+app.use(express.json());
+
+app.post('/api/v1/digimon', (res, req, next) => {
     Digimon
         .insert(req.body)
-        .then(console.log)
-})
+        .then(digimon => res.send(digimon))
+        .catch(next);
+});
 
-app.get('/digimon', (res, req) => {
+app.get('/api/v1/digimon', (res, req, send) => {
     Digimon
         .find()
-        .then(console.log)
-})
+        .then(digimon => res.send(digimon))
+        .catch(next);
+});
 
-app.get('/digimon', (res, req) => {
+app.get('/api/v1/digimon/:id', (res, req) => {
     Digimon
-        .findById(req.body)
-        .then(console.log)
-})
+        .findById(req.params.id)
+        .then(digimon => res.send(digimon))
+        .catch(next);
+});
 
-app.put('/digimon', (res, req) => {
+app.put('/api/v1/digimon/:id', (res, req) => {
     Digimon
-        .update(req.body)
-        .then(console.log)
-})
+        .update(req.body.id, req.body)
+        .then(digimon => res.send(digimon))
+        .catch(next);
+});
 
-app.delete('/digimon', (res, req) => {
+app.delete('/api/v1/digimon/:id', (res, req) => {
     Digimon
-        .delete(req.body)
-        .then(console.log)
-})
+        .delete(req.params.id)
+        .then(digimon => res.send(digimon))
+        .catch(next);
+});
 
-app.listen('3000', () => {
-    console.log('listening on port 3000')
-})
+module.exports = app;
